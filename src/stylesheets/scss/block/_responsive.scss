@@ -1,0 +1,15 @@
+@media screen and (max-width: 610px) {
+    .todo__block {
+        margin-bottom: 300px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #root {
+        justify-content: start;
+    }
+
+    .todo__block {
+        margin-bottom: 0;
+    }
+}
