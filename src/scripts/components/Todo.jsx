@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRef } from 'react'
 import '../../stylesheets/css/main.css'
 import Done_list from './Todo_components/Done_list.jsx'
 import Swal from 'sweetalert2'
@@ -7,6 +8,7 @@ import Swal from 'sweetalert2'
 
 const Todo = () => {
     const [title, setTitle] = useState('')
+    const inputRef = useRef(null)
 
 
     const data = JSON.parse(localStorage.getItem('data')) || [];
@@ -34,7 +36,8 @@ const Todo = () => {
         setItem(newTodos)
 
         localStorage.setItem('data', JSON.stringify(newTodos))
-        document.getElementById('input').value = ''
+        inputRef.current.value = ''
+        inputRef.current.focus()
     }
 
     const delTodo = (id) => {
@@ -77,7 +80,7 @@ const Todo = () => {
     return (
         <div className="todo__block">
             <div className="todo__form">
-                <input onChange={(e) => setTitle(e.target.value)} type="text" aria-label='input' placeholder='Add a new task' id="input" required />
+                <input ref={inputRef} onChange={(e) => setTitle(e.target.value)} type="text" aria-label='input' placeholder='Add a new task' id="input" required />
                 <button disabled={title === ''} onClick={formSubmit} className="todo__form__btn" type="submit"></button>
             </div>
             <div className="todo__list">
